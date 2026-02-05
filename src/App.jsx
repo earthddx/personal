@@ -4,7 +4,7 @@ const engineer = {
   name: "Artem Murzo",
   title: "Full-Stack Software Engineer",
   location: "Reston, VA",
-  resumeUrl: "/FullStack_Artem_Murzo.pdf",
+  resumeUrl: "/resume.pdf",
   summary:
     "5+ years specializing in React, JS/TS,  and Node.js. Expert in frontend architecture and building secure, API-driven SaaS platforms.",
   stack: ["React", "JavaScript", "TypeScript", "Node.js", "React Native", "Next.js"],
