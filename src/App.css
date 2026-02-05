@@ -236,6 +236,7 @@
 
   .dot {
     width: 8px;
+    min-width: 8px;
     height: 8px;
     background-color: #10b981; /* Green */
     border-radius: 50%;
