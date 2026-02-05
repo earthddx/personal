@@ -125,6 +125,18 @@
     transform: translate(2px, -2px);
   }
 
+  .project-box.featured,
+  .project-box.featured:visited,
+  .social-link,
+  .social-link:visited {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .project-box.featured p {
+    color: var(--secondary);
+  }
+
   footer {
     margin-top: 40px;
     border-top: 1px solid var(--border);
