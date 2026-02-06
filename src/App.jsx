@@ -7,7 +7,14 @@ const engineer = {
   resumeUrl: "https://earthddx.github.io/personal/resume.pdf",
   summary:
     "5+ years specializing in React, JS/TS,  and Node.js. Expert in frontend architecture and building secure, API-driven SaaS platforms.",
-  stack: ["React", "JavaScript", "TypeScript", "Node.js", "React Native", "Next.js"],
+  stack: [
+    "React",
+    "JavaScript",
+    "TypeScript",
+    "Node.js",
+    "React Native",
+    "Next.js",
+  ],
   links: [
     { name: "GitHub", url: "https://github.com/earthddx", icon: "💻" },
     { name: "LinkedIn", url: "https://linkedin.com/in/artemmurzo", icon: "💼" },
@@ -15,6 +22,15 @@ const engineer = {
     { name: "Email", url: "mailto:murzotom@rocketmail.com", icon: "✉️" },
   ],
 };
+
+const pipeline = [
+  {
+    title: "GenAI Fundamentals",
+    provider: "Kaggle",
+    status: "Upcoming",
+    link: "https://www.kaggle.com/learn-guide/5-day-genai",
+  },
+];
 
 function App() {
   return (
@@ -60,6 +76,25 @@ function App() {
               vector embeddings.
             </p>
           </a>
+        </div>
+
+        <div className="pipeline-section">
+          <div className="section-label">Coming Up</div>
+          {pipeline.map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              target="_blank"
+              rel="noreferrer"
+              className="pipeline-card"
+            >
+              <div className="pipeline-info">
+                <span className="pipeline-title">{item.title}</span>
+                <span className="pipeline-meta">{item.provider}</span>
+              </div>
+              <span className="status-tag">Plan</span>
+            </a>
+          ))}
         </div>
 
         <div className="skills-pill-container">

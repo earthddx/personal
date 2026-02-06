@@ -20,6 +20,7 @@
   padding: 20px;
   min-height: 100%;
 
+  /* Update your .card styles to this */
   .card {
     max-width: 540px;
     width: 100%;
@@ -28,8 +29,36 @@
     border-radius: 24px;
     padding: 24px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     margin: 0 auto;
+    position: relative; /* Required for the glow element */
+    overflow: hidden; /* Keeps the glow inside the rounded corners */
+  }
+
+  /* The Precision Highlight */
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px; /* A hairline thin highlight */
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.5),
+      /* Your accent color */ transparent
+    );
+    z-index: 1;
+  }
+
+  /* Optional: Add a subtle inner-border glow */
+  .card {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Subtle "Active" look on hover */
+  .card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
   }
 
   .header-meta {
@@ -167,7 +196,7 @@
       rgba(255, 255, 255, 0.02)
     );
     border: 1px solid rgba(59, 130, 246, 0.3);
-    padding: 20px;
+    padding: 14px;
     border-radius: 16px;
     transition:
       transform 0.2s ease,
@@ -242,6 +271,55 @@
     border-radius: 50%;
     box-shadow: 0 0 8px #10b981;
     animation: pulse 2s infinite;
+  }
+
+  .pipeline-section {
+    margin-top: 24px;
+    margin-bottom: 24px;;
+  }
+
+  .pipeline-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.2s ease;
+  }
+
+  .pipeline-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--secondary);
+  }
+
+  .pipeline-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pipeline-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .pipeline-meta {
+    font-size: 11px;
+    color: var(--secondary);
+  }
+
+  .status-tag {
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 4px;
   }
 }
 
