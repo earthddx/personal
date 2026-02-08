@@ -1,15 +1,35 @@
 :root {
-  --primary: #ffffff;
-  --secondary: #a1a1aa;
-  --accent: #3b82f6; /* Modern Blue */
-  --bg: #09090b;
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.1);
+  --primary: #18181b;
+  --secondary: #52525b;
+  --accent: #2563eb;
+  --bg: #fafafa;
+  --glass: rgba(0, 0, 0, 0.03);
+  --border: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #ffffff;
+    --secondary: #a1a1aa;
+    --accent: #3b82f6;
+    --bg: #09090b;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  }
+} 
 
 * {
   box-sizing: border-box;
 }
+
+body {
+  background-color: var(--bg);
+  color: var(--primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 .container {
   display: flex;
@@ -20,7 +40,6 @@
   padding: 20px;
   min-height: 100%;
 
-  /* Update your .card styles to this */
   .card {
     max-width: 540px;
     width: 100%;
@@ -30,33 +49,22 @@
     padding: 24px;
     backdrop-filter: blur(10px);
     margin: 0 auto;
-    position: relative; /* Required for the glow element */
-    overflow: hidden; /* Keeps the glow inside the rounded corners */
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
-  /* The Precision Highlight */
   .card::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 1px; /* A hairline thin highlight */
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(59, 130, 246, 0.5),
-      /* Your accent color */ transparent
-    );
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
     z-index: 1;
   }
 
-  /* Optional: Add a subtle inner-border glow */
-  .card {
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  }
-
-  /* Subtle "Active" look on hover */
   .card:hover {
     border-color: rgba(59, 130, 246, 0.4);
   }
@@ -131,7 +139,7 @@
     color: white;
     font-weight: 500;
     transition: all 0.2s ease;
-    border: 1px solid transparent;
+    border: 1px solid var(--border);
   }
 
   .social-link span:first-child {
@@ -189,6 +197,7 @@
 
   .project-box.featured {
     display: block;
+    color: var(--primary);
     text-decoration: none;
     background: linear-gradient(
       145deg,
@@ -256,7 +265,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--glass);
     padding: 8px 12px;
     border-radius: 8px;
     margin-bottom: 24px;
