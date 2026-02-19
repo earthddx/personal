@@ -6,7 +6,7 @@ const engineer = {
   location: "Reston, VA",
   resumeUrl: "https://earthddx.github.io/personal/resume.pdf",
   summary:
-    "5+ years specializing in React, JS/TS, and Node.js. Expert in frontend architecture and building secure, API-driven SaaS platforms.",
+    "5+ years specializing in React, JS/TS, and Next.js. Expert in frontend architecture and building secure, API-driven SaaS platforms.",
   stack: [
     "React",
     "JavaScript",
@@ -69,11 +69,37 @@ function App() {
           >
             <div className="project-header">
               <strong>next-rag</strong>
-              <span className="tech-tag">New</span>
+              <div className="tag-group">
+                <span className="tech-tag">Next.js</span>
+                <span className="tech-tag secondary-tag">AI SDK</span>
+              </div>
             </div>
             <p>
               RAG chat application utilizing semantic document retrieval and
               vector embeddings.
+            </p>
+          </a>
+        </div>
+
+        <div className="work-highlight">
+          <div className="section-label">Native Mobile Project</div>
+          <a
+            href="https://github.com/earthddx/instaclone"
+            target="_blank"
+            rel="noreferrer"
+            className="project-box featured"
+          >
+            <div className="project-header">
+              <strong>instaclone</strong>
+              <div className="tag-group">
+                <span className="tech-tag">React Native</span>
+                <span className="tech-tag secondary-tag">Expo</span>
+              </div>
+            </div>
+            <p>
+              Cross-platform social application built with React Native and
+              Expo. Features native image picking, secure authentication, and a
+              highly responsive mobile-first UI.
             </p>
           </a>
         </div>
