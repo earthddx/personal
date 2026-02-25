@@ -305,6 +305,9 @@ body {
     font-size: 14px;
     line-height: 1;
     transition: 0.2s;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
   }
 
   .theme-toggle:hover {
