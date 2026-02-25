@@ -1,12 +1,14 @@
+import { useState, useEffect } from "react";
 import "./App.css";
 
 const engineer = {
   name: "Artem Murzo",
   title: "Software Engineer",
   location: "Reston, VA",
+  available: true,
   resumeUrl: "https://earthddx.github.io/personal/resume.pdf",
   summary:
-    "5+ years specializing in React, JS/TS, and Next.js. Expert in frontend architecture and building secure, API-driven SaaS platforms.",
+    "5+ years in React, React Native, TypeScript, and Next.js. I build frontend systems — from architecture to auth to AI integrations.",
   stack: [
     "React",
     "JavaScript",
@@ -27,21 +29,55 @@ const pipeline = [
   {
     title: "GenAI Fundamentals",
     provider: "Kaggle",
-    status: "Upcoming",
+    status: "Coming up",
     link: "https://www.kaggle.com/learn-guide/5-day-genai",
   },
 ];
 
 function App() {
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+
   return (
     <div className="container">
       <div className="card">
         <header>
           <div className="header-meta">
-            <div className="badge">Reston, VA</div>
-            <a href={engineer.resumeUrl} target="_blank" className="resume-tag">
-              View Resume 📄
-            </a>
+            <div className="badge-group">
+              <div className="badge">{engineer.location}</div>
+              {engineer.available && (
+                <div className="badge avail">Open to work</div>
+              )}
+            </div>
+            <div className="header-actions">
+              <a
+                href={engineer.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="resume-tag"
+              >
+                View Resume 📄
+              </a>
+              <button
+                className="theme-toggle"
+                onClick={toggleTheme}
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? "☀️" : "🌙"}
+              </button>
+            </div>
           </div>
           <h1>{engineer.name}</h1>
           <p className="title">{engineer.title}</p>
@@ -105,7 +141,7 @@ function App() {
         </div>
 
         <div className="pipeline-section">
-          <div className="section-label">Coming Up</div>
+          <div className="section-label">{pipeline[0].status}</div>
           {pipeline.map((item, index) => (
             <a
               key={index}
