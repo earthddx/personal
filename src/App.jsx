@@ -56,10 +56,10 @@ function App() {
         <header>
           <div className="header-meta">
             <div className="badge-group">
-              <div className="badge">{engineer.location}</div>
               {engineer.available && (
                 <div className="badge avail">Open to work</div>
               )}
+              <div className="badge">{engineer.location}</div>
             </div>
             <div className="header-actions">
               <a
@@ -141,7 +141,9 @@ function App() {
         </div>
 
         <div className="pipeline-section">
-          <div className="section-label">{pipeline[0].status}</div>
+          {pipeline[0]?.status && (
+            <div className="section-label">{pipeline[0].status}</div>
+          )}
           {pipeline.map((item, index) => (
             <a
               key={index}
