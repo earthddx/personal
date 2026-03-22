@@ -307,6 +307,10 @@ body {
     margin-bottom: 24px;
     font-size: 13px;
 
+    @media (max-width: 640px) {
+      margin-top: 20px;
+    }
+
     code {
       background: rgba(59, 130, 246, 0.1);
       color: var(--accent);
@@ -344,9 +348,9 @@ body {
     gap: 12px;
     margin-bottom: 4px;
 
-    @media (min-width: 641px) {
+    @media (min-width: 900px) {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
