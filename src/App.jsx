@@ -10,7 +10,7 @@ const engineer = {
   available: true,
   resumeUrl: "https://earthddx.github.io/personal/resume.pdf",
   summary:
-    "Software engineer with 5+ years in the JS/TS ecosystem. I build full-stack products from database schemas and API design to polished UIs. Lately focused on AI-powered apps and cross-platform mobile.",
+    "5+ years in the JS/TS ecosystem. I build full-stack products from database schemas and API design to polished UIs. Lately focused on AI-powered apps and cross-platform mobile.",
   stack: [
     "React",
     "JavaScript",
