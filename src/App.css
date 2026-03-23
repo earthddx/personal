@@ -273,6 +273,11 @@ body {
     @media (min-width: 641px) {
       grid-area: main;
       min-width: 0;
+      min-height: calc(100vh - 280px);
+    }
+
+    @media (min-width: 1100px) {
+      padding-right: 120px;
     }
   }
 
@@ -475,6 +480,165 @@ body {
     border-radius: 100px;
     color: var(--accent);
   }
+}
+
+/* ── Experience ── */
+
+.container .experience-section {
+  margin-top: 0;
+}
+
+.container .experience-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.container .experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container .experience-period {
+  font-size: 11px;
+  color: var(--secondary);
+}
+
+.container .experience-company {
+  font-size: 12px;
+  color: var(--secondary);
+}
+
+.container .experience-bullets {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.container .experience-bullets li {
+  font-size: 12px;
+  color: var(--secondary);
+  line-height: 1.6;
+}
+
+/* ── Stack ── */
+
+.container .stack-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.container .stack-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.container .stack-category {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--secondary);
+}
+
+.container .stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Timeline nav ── */
+
+.timeline-nav {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: none;
+
+  @media (min-width: 1100px) {
+    display: flex;
+  }
+}
+
+.timeline-line {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 150px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: var(--border);
+  }
+}
+
+.section-view {
+  animation: fadeUp 0.25s ease;
+}
+
+.timeline-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: 1.5px solid var(--secondary);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  z-index: 1;
+
+  &:hover,
+  &.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+}
+
+.timeline-dot-label {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.timeline-dot:hover .timeline-dot-label,
+.timeline-dot.active .timeline-dot-label {
+  opacity: 1;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse {

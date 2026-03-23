@@ -27,6 +27,44 @@ const engineer = {
   ],
 };
 
+const experience = [
+  {
+    role: "Software Engineer",
+    company: "Pantheon Inc.",
+    location: "Reston, VA",
+    period: "Sep 2020 – Present",
+    bullets: [
+      "Drove core feature architecture for Odyssey Studio, leading the transition from a legacy system to a scalable no-code platform adopted by 30+ client organizations.",
+      "Owned frontend architecture and implemented lazy loading, code splitting, and rendering optimizations — contributing to a 25% reduction in page load times.",
+      "Co-led frontend modernization: refactored large monolithic modules into a feature-focused structure with reusable components and isolated business logic.",
+      "Architected a hybrid mobile app with React Native and WebView, supporting offline PWA functionality and secure QR-based auth on iOS and Android.",
+      "Built the frontend foundation for an AI-assisted code generation tool for dynamic, conversational creation of configurable UI components.",
+    ],
+  },
+  {
+    role: "Computer Engineer",
+    company: "Computer Information Center",
+    location: "Baikonur Cosmodrome, Kazakhstan",
+    period: "Sep 2013 – Nov 2014",
+    bullets: [
+      "Developed and optimized 5+ math-intensive applications for real-time rocket telemetry calculations using Delphi and C++.",
+      "Enhanced telemetry software with advanced algorithms for trajectory analysis and flight data processing.",
+      "Collaborated with senior engineers to document technical processes and create troubleshooting guides.",
+    ],
+  },
+];
+
+const stack = [
+  { category: "Languages", items: ["TypeScript", "JavaScript", "HTML5", "CSS3", "SCSS"] },
+  { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "NativeWind", "Material UI"] },
+  { category: "Mobile", items: ["React Native", "Expo", "PWA", "WebView"] },
+  { category: "State", items: ["Zustand", "Recoil", "Jotai", "Context API", "TanStack Query"] },
+  { category: "Backend & Data", items: ["Node.js", "Express.js", "GraphQL", "MongoDB", "PostgreSQL", "Firebase", "Appwrite"] },
+  { category: "Visualization & Maps", items: ["D3.js", "Recharts", "Chart.js", "Google Maps", "Leaflet"] },
+  { category: "Tooling", items: ["Git", "Vercel", "Vite", "Webpack", "Jest", "Storybook", "CI/CD", "Zod", "React Hook Form"] },
+  { category: "AI", items: ["Vercel AI SDK", "RAG", "pgvector"] },
+];
+
 const pipeline = [
   {
     title: "GenAI Fundamentals",
@@ -45,10 +83,39 @@ function App() {
       : "light";
   });
 
+  const [activeSection, setActiveSection] = useState("projects");
+
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const sections = ["projects", "experience", "stack"];
+    let cooldown = false;
+    const handleWheel = (e) => {
+      if (window.innerWidth <= 640) return;
+      if (cooldown) return;
+      cooldown = true;
+      setTimeout(() => { cooldown = false; }, 700);
+      setActiveSection((prev) => {
+        const idx = sections.indexOf(prev);
+        if (e.deltaY > 0 && idx < sections.length - 1) return sections[idx + 1];
+        if (e.deltaY < 0 && idx > 0) return sections[idx - 1];
+        return prev;
+      });
+    };
+    const handleResize = () => {
+      if (window.innerWidth <= 640) setActiveSection("projects");
+
+    };
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
@@ -112,71 +179,128 @@ function App() {
         </aside>
 
         <main className="main-content">
-          <div className="now-playing">
-            <span className="dot"></span>
-            <p>
-              <strong>Currently:</strong> Building <code>next-rag</code> with
-              Next.js 16 & AI SDK
-            </p>
-          </div>
+          {activeSection === "projects" && (
+            <div className="section-view">
+              <div className="now-playing">
+                <span className="dot"></span>
+                <p>
+                  <strong>Currently:</strong> Building <code>next-rag</code> with
+                  Next.js 16 & AI SDK
+                </p>
+              </div>
 
-          <div className="work-highlight">
-            <div className="section-label">Pinned Projects</div>
-            <div className="project-grid">
-              {pinnedRepos.map((repo) => (
-                <a
-                  key={repo.name}
-                  href={repo.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="project-box featured"
-                >
-                  <div className="project-header">
-                    <strong>{repo.name}</strong>
-                    {repo.stargazerCount > 0 && (
-                      <span className="star-count">
-                        ★ {repo.stargazerCount}
-                      </span>
-                    )}
-                  </div>
-                  {repo.description && <p>{repo.description}</p>}
-                  {repo.repositoryTopics.nodes.length > 0 && (
-                    <div className="topic-list">
-                      {repo.repositoryTopics.nodes.map(({ topic }) => (
-                        <span key={topic.name} className="topic-tag">
-                          {topic.name}
-                        </span>
-                      ))}
+              <div className="work-highlight">
+                <div className="section-label">Pinned Projects</div>
+                <div className="project-grid">
+                  {pinnedRepos.map((repo) => (
+                    <a
+                      key={repo.name}
+                      href={repo.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-box featured"
+                    >
+                      <div className="project-header">
+                        <strong>{repo.name}</strong>
+                        {repo.stargazerCount > 0 && (
+                          <span className="star-count">★ {repo.stargazerCount}</span>
+                        )}
+                      </div>
+                      {repo.description && <p>{repo.description}</p>}
+                      {repo.repositoryTopics.nodes.length > 0 && (
+                        <div className="topic-list">
+                          {repo.repositoryTopics.nodes.map(({ topic }) => (
+                            <span key={topic.name} className="topic-tag">
+                              {topic.name}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pipeline-section">
+                {pipeline[0]?.status && (
+                  <div className="section-label">{pipeline[0].status}</div>
+                )}
+                {pipeline.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="pipeline-card"
+                  >
+                    <div className="pipeline-info">
+                      <span className="pipeline-title">{item.title}</span>
+                      <span className="pipeline-meta">{item.provider}</span>
                     </div>
-                  )}
-                </a>
+                    <span className="status-tag">Plan</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeSection === "experience" && (
+            <div className="section-view">
+              <div className="section-label">Experience</div>
+              {experience.map((job, i) => (
+                <div key={i} className="experience-card">
+                  <div className="experience-header">
+                    <strong>{job.role}</strong>
+                    <span className="experience-period">{job.period}</span>
+                  </div>
+                  <span className="experience-company">{job.company} · {job.location}</span>
+                  <ul className="experience-bullets">
+                    {job.bullets.map((b, j) => (
+                      <li key={j}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
-          </div>
-
-          <div className="pipeline-section">
-            {pipeline[0]?.status && (
-              <div className="section-label">{pipeline[0].status}</div>
-            )}
-            {pipeline.map((item, index) => (
-              <a
-                key={index}
-                href={item.link}
-                target="_blank"
-                rel="noreferrer"
-                className="pipeline-card"
-              >
-                <div className="pipeline-info">
-                  <span className="pipeline-title">{item.title}</span>
-                  <span className="pipeline-meta">{item.provider}</span>
-                </div>
-                <span className="status-tag">Plan</span>
-              </a>
-            ))}
-          </div>
-
+          )}
+          {activeSection === "stack" && (
+            <div className="section-view">
+              <div className="section-label">Stack</div>
+              <div className="stack-groups">
+                {stack.map(({ category, items }) => (
+                  <div key={category} className="stack-group">
+                    <span className="stack-category">{category}</span>
+                    <div className="stack-pills">
+                      {items.map((item) => (
+                        <span key={item} className="skill-pill">{item}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </main>
       </div>
+
+      <nav className="timeline-nav">
+        <div className="timeline-line">
+          {[
+            { id: "projects", label: "Projects" },
+            { id: "experience", label: "Experience" },
+            { id: "stack", label: "Stack" },
+          ].map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => setActiveSection(id)}
+              className={`timeline-dot${activeSection === id ? " active" : ""}`}
+              aria-label={label}
+            >
+              <span className="timeline-dot-label">{label}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   );
 }
