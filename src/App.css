@@ -475,10 +475,10 @@ body {
   .skill-pill {
     font-size: 12px;
     padding: 4px 12px;
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    background: color-mix(in srgb, var(--category-color, var(--accent)) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--category-color, var(--accent)) 35%, transparent);
     border-radius: 100px;
-    color: var(--accent);
+    color: var(--category-color, var(--accent));
   }
 }
 

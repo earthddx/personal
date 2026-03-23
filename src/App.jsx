@@ -55,14 +55,14 @@ const experience = [
 ];
 
 const stack = [
-  { category: "Languages", items: ["TypeScript", "JavaScript", "HTML5", "CSS3", "SCSS"] },
-  { category: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "NativeWind", "Material UI"] },
-  { category: "Mobile", items: ["React Native", "Expo", "PWA", "WebView"] },
-  { category: "State", items: ["Zustand", "Recoil", "Jotai", "Context API", "TanStack Query"] },
-  { category: "Backend & Data", items: ["Node.js", "Express.js", "GraphQL", "MongoDB", "PostgreSQL", "Firebase", "Appwrite"] },
-  { category: "Visualization & Maps", items: ["D3.js", "Recharts", "Chart.js", "Google Maps", "Leaflet"] },
-  { category: "Tooling", items: ["Git", "Vercel", "Vite", "Webpack", "Jest", "Storybook", "CI/CD", "Zod", "React Hook Form"] },
-  { category: "AI", items: ["Vercel AI SDK", "RAG", "pgvector"] },
+  { category: "Languages",           color: "#8b5cf6", items: ["TypeScript", "JavaScript", "HTML5", "CSS3", "SCSS"] },
+  { category: "Frontend",            color: "#2563eb", items: ["React", "Next.js", "Tailwind CSS", "NativeWind", "Material UI"] },
+  { category: "Mobile",              color: "#06b6d4", items: ["React Native", "Expo", "PWA", "WebView"] },
+  { category: "State",               color: "#f59e0b", items: ["Zustand", "Recoil", "Jotai", "Context API", "TanStack Query"] },
+  { category: "Backend & Data",      color: "#10b981", items: ["Node.js", "Express.js", "GraphQL", "MongoDB", "PostgreSQL", "Firebase", "Appwrite"] },
+  { category: "Visualization & Maps",color: "#ec4899", items: ["D3.js", "Recharts", "Chart.js", "Google Maps", "Leaflet"] },
+  { category: "Tooling",             color: "#6b7280", items: ["Git", "Vercel", "Vite", "Webpack", "Jest", "Storybook", "CI/CD", "Zod", "React Hook Form"] },
+  { category: "AI",                  color: "#6366f1", items: ["Vercel AI SDK", "RAG", "pgvector"] },
 ];
 
 const pipeline = [
@@ -267,8 +267,8 @@ function App() {
             <div className="section-view">
               <div className="section-label">Stack</div>
               <div className="stack-groups">
-                {stack.map(({ category, items }) => (
-                  <div key={category} className="stack-group">
+                {stack.map(({ category, color, items }) => (
+                  <div key={category} className="stack-group" style={{ "--category-color": color }}>
                     <span className="stack-category">{category}</span>
                     <div className="stack-pills">
                       {items.map((item) => (
