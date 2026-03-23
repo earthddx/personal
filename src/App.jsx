@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import pinnedRepos from "./data/pinnedRepos.json";
+import { FaGithub, FaLinkedin, FaXTwitter, FaEnvelope } from "react-icons/fa6";
 
 const engineer = {
   name: "Artem Murzo",
@@ -19,10 +20,10 @@ const engineer = {
     "Next.js",
   ],
   links: [
-    { name: "GitHub", url: "https://github.com/earthddx", icon: "💻" },
-    { name: "LinkedIn", url: "https://linkedin.com/in/artemmurzo", icon: "💼" },
-    { name: "Twitter", url: "https://x.com/ArtemMurzo", icon: "🐦" },
-    { name: "Email", url: "mailto:murzotom@rocketmail.com", icon: "✉️" },
+    { name: "GitHub", url: "https://github.com/earthddx", icon: FaGithub },
+    { name: "LinkedIn", url: "https://linkedin.com/in/artemmurzo", icon: FaLinkedin },
+    { name: "Twitter", url: "https://x.com/ArtemMurzo", icon: FaXTwitter },
+    { name: "Email", url: "mailto:murzotom@rocketmail.com", icon: FaEnvelope },
   ],
 };
 
@@ -86,6 +87,13 @@ function App() {
           <section className="about">
             <p>{engineer.summary}</p>
           </section>
+          <div className="skills-pill-container">
+            {engineer.stack.map((skill) => (
+              <span key={skill} className="skill-pill">
+                {skill}
+              </span>
+            ))}
+          </div>
           <nav className="link-list">
             {engineer.links.map((link) => (
               <a
@@ -95,7 +103,7 @@ function App() {
                 rel="noreferrer"
                 className="social-link"
               >
-                <span>{link.icon}</span>
+                <link.icon size={16} />
                 {link.name}
                 <span className="arrow">↗</span>
               </a>
@@ -167,13 +175,6 @@ function App() {
             ))}
           </div>
 
-          <div className="skills-pill-container">
-            {engineer.stack.map((skill) => (
-              <span key={skill} className="skill-pill">
-                {skill}
-              </span>
-            ))}
-          </div>
         </main>
       </div>
     </div>

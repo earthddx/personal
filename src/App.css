@@ -2,7 +2,7 @@
   --primary: #18181b;
   --secondary: #52525b;
   --accent: #2563eb;
-  --bg: #fafafa;
+  --bg: #f0f0f0;
   --glass: rgba(0, 0, 0, 0.03);
   --border: rgba(0, 0, 0, 0.1);
   --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
@@ -24,7 +24,7 @@
   --primary: #18181b;
   --secondary: #52525b;
   --accent: #2563eb;
-  --bg: #fafafa;
+  --bg: #f0f0f0;
   --glass: rgba(0, 0, 0, 0.03);
   --border: rgba(0, 0, 0, 0.1);
   --card-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
@@ -42,6 +42,25 @@
 
 * {
   box-sizing: border-box;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--accent) 70%, transparent);
+  z-index: 9999;
+}
+
+body::before {
+  top: 0;
+}
+
+body::after {
+  bottom: 0;
 }
 
 body {
@@ -62,21 +81,14 @@ body {
   min-height: 100%;
 
   @media (max-width: 480px) {
-    padding: 0;
-    background: var(--bg);
+    padding: 16px;
   }
 
   .card {
     width: 100%;
     max-width: 540px;
-    background: var(--glass);
-    border: 1px solid var(--border);
-    border-radius: 24px;
     padding: 24px;
-    backdrop-filter: blur(10px);
     margin: 0 auto;
-    position: relative;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 
     @media (min-width: 641px) {
       max-width: min(1400px, calc(100vw - 80px));
@@ -90,33 +102,6 @@ body {
       align-items: start;
       padding: 32px 36px;
     }
-
-    @media (max-width: 480px) {
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      background: transparent;
-    }
-  }
-
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    z-index: 1;
-
-    @media (max-width: 480px) {
-      display: none;
-    }
-  }
-
-  .card:hover {
-    border-color: rgba(59, 130, 246, 0.4);
   }
 
   /* ── Top bar (badges + actions) ── */
@@ -157,13 +142,15 @@ body {
     letter-spacing: 0.05em;
     padding: 4px 12px;
     border-radius: 100px;
-    background: rgba(59, 130, 246, 0.1);
+    background: rgba(59, 130, 246, 0.15);
     color: var(--accent);
+    border: 1px solid rgba(59, 130, 246, 0.3);
   }
 
   .badge.avail {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    color: #059669;
+    border: 1px solid rgba(16, 185, 129, 0.3);
   }
 
   .header-actions {
@@ -243,36 +230,29 @@ body {
   .link-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
   }
 
   .social-link {
     display: flex;
     align-items: center;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
+    gap: 10px;
+    padding: 6px 0;
     text-decoration: none;
-    color: var(--primary);
-    font-weight: 500;
+    color: var(--secondary);
     font-size: 14px;
-    transition: all 0.2s ease;
-    border: 1px solid var(--border);
+    transition: color 0.2s ease;
   }
 
-  .social-link span:first-child {
-    margin-right: 10px;
+  .social-link:hover {
+    color: var(--primary);
   }
 
   .arrow {
     margin-left: auto;
-    opacity: 0.3;
+    opacity: 0;
     transition: 0.2s;
-  }
-
-  .social-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--accent);
+    font-style: normal;
   }
 
   .social-link:hover .arrow {
@@ -338,6 +318,18 @@ body {
     letter-spacing: 1.5px;
     margin-bottom: 12px;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 3px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
   }
 
   /* ── Project grid ── */
@@ -473,15 +465,16 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 24px;
   }
 
   .skill-pill {
     font-size: 12px;
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--secondary);
+    padding: 4px 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 100px;
+    color: var(--accent);
   }
 }
 
