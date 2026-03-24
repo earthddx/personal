@@ -65,6 +65,63 @@ const stack = [
   { category: "AI",                  color: "#6366f1", items: ["Vercel AI SDK", "RAG", "pgvector"] },
 ];
 
+const usefulLinks = [
+  {
+    title: "5-Day Gen AI Intensive Course",
+    source: "kaggle.com",
+    tag: "AI",
+    url: "https://www.kaggle.com/learn-guide/5-day-genai",
+  },
+  {
+    title: "Algorithms",
+    source: "Frontend Masters",
+    tag: "Course",
+    url: "https://frontendmasters.com/courses/algorithms/introduction/",
+  },
+  {
+    title: "NeetCode 150",
+    source: "neetcode.io",
+    tag: "DSA",
+    url: "https://neetcode.io/practice/practice/neetcode150",
+  },
+  {
+    title: "Bulletproof React",
+    source: "github.com/alan2207",
+    tag: "React",
+    url: "https://github.com/alan2207/bulletproof-react",
+  },
+  {
+    title: "React Design Patterns",
+    source: "gist.github.com/dariuscosden",
+    tag: "React",
+    url: "https://gist.github.com/dariuscosden/52dc2376f05c7617f8ddc5fe7c5a41af",
+  },
+  {
+    title: "Ref Callbacks, React 19, and the Compiler",
+    source: "tkdodo.eu",
+    tag: "React",
+    url: "https://tkdodo.eu/blog/ref-callbacks-react-19-and-the-compiler",
+  },
+  {
+    title: "Beyond React.memo: Smarter Performance Optimization",
+    source: "cekrem.github.io",
+    tag: "React",
+    url: "https://cekrem.github.io/posts/beyond-react-memo-smarter-performance-optimization/",
+  },
+  {
+    title: "React.memo: When It Helps, When It Hurts",
+    source: "cekrem.github.io",
+    tag: "React",
+    url: "https://cekrem.github.io/posts/react-memo-when-it-helps-when-it-hurts/",
+  },
+  {
+    title: "React Reconciliation Deep Dive",
+    source: "cekrem.github.io",
+    tag: "React",
+    url: "https://cekrem.github.io/posts/react-reconciliation-deep-dive/",
+  },
+];
+
 const pipeline = [
   {
     title: "GenAI Fundamentals",
@@ -91,7 +148,7 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const sections = ["projects", "experience", "stack"];
+    const sections = ["projects", "experience", "stack", "links"];
     let cooldown = false;
     const handleWheel = (e) => {
       if (window.innerWidth <= 640) return;
@@ -280,6 +337,26 @@ function App() {
               </div>
             </div>
           )}
+          {activeSection === "links" && (
+            <div className="section-view">
+              <div className="section-label">Useful Links</div>
+              {usefulLinks.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="useful-link-card"
+                >
+                  <div className="pipeline-info">
+                    <span className="pipeline-title">{link.title}</span>
+                    <span className="pipeline-meta">{link.source}</span>
+                  </div>
+                  <span className="status-tag">{link.tag}</span>
+                </a>
+              ))}
+            </div>
+          )}
         </main>
       </div>
 
@@ -289,6 +366,7 @@ function App() {
             { id: "projects", label: "Projects" },
             { id: "experience", label: "Experience" },
             { id: "stack", label: "Stack" },
+            { id: "links", label: "Links" },
           ].map(({ id, label }) => (
             <button
               key={id}
