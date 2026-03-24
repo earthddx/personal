@@ -79,6 +79,12 @@ const usefulLinks = [
     url: "https://frontendmasters.com/courses/algorithms/introduction/",
   },
   {
+    title: "Interview Prep",
+    source: "earthddx.github.io",
+    tag: "DSA",
+    url: "https://earthddx.github.io/interview-prep/",
+  },
+  {
     title: "NeetCode 150",
     source: "neetcode.io",
     tag: "DSA",
